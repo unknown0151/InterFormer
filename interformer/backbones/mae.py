@@ -241,6 +241,8 @@ class MAEWithSimpleFPN(MAE):
                  pos_embed_resize_mode='nearest',
                  rel_pos_embed_resize_mode='nearest',
                  use_rel_pos_embed=True):
+        self.pos_embed_resize_mode = pos_embed_resize_mode
+        self.rel_pos_embed_resize_mode = rel_pos_embed_resize_mode
         super(MAEWithSimpleFPN, self).__init__(
             img_size=img_size,
             patch_size=patch_size,
@@ -268,8 +270,6 @@ class MAEWithSimpleFPN(MAE):
             self.with_fpn = True
         else:
             self.with_fpn = False
-        self.pos_embed_resize_mode = pos_embed_resize_mode
-        self.rel_pos_embed_resize_mode = rel_pos_embed_resize_mode
         self.use_rel_pos_embed = use_rel_pos_embed
         if not use_rel_pos_embed:
             def delete_rel_pos_embed(module):
