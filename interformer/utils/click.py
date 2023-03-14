@@ -122,7 +122,7 @@ def point_list_to_ref_labels(labels: Union[torch.Tensor, np.ndarray],
     # Convert the labels tensor to CPU and reshape it
     to_tensor = isinstance(labels, torch.Tensor)
     labels = labels.cpu() if to_tensor else labels
-    labels = labels.reshape((-1,) + labels.shape[-2:])
+    labels = labels.reshape((-1, ) + labels.shape[-2:])
 
     # Create reference labels for each point list
     ref_labels = list()
@@ -202,17 +202,9 @@ def click(pre_label: Union[torch.Tensor, np.ndarray],
     seg_label = (seg_label == 1)
 
     # Create ignore mask based on points
-    if points is not None:
-        ignore_mask = np.zeros_like(seg_label)
-        for y, x, mode in points:
-            if mode == CLK_POSITIVE:
-                ignore_mask[max(y - 3, 0):min(y + 4, seg_label.shape[0]),
-                            max(x - 3, 0):min(x + 4, seg_label.shape[1])] = 1
-            elif mode == CLK_NEGATIVE:
-                ignore_mask[max(y - 10, 0):min(y + 11, seg_label.shape[0]),
-                            max(x - 10, 0):min(x + 11, seg_label.shape[1])] = 1
-    else:
-        ignore_mask = np.zeros_like(seg_label)
+    ignore_mask = np.zeros_like(pre_label, dtype=bool)
+    for y, x, _ in (list() if points is None else points):
+        ignore_mask[y, x] = True
 
     # Calculate distance maps based on ignore_mask
     fneg = np.logical_and(~pre_label, seg_label)
@@ -229,10 +221,10 @@ def click(pre_label: Union[torch.Tensor, np.ndarray],
 
     # Determine click mode and points based on maximum distances
     if ndmax > pdmax:
-        mode = CLK_NEGATIVE
+        mode = CLK_POSITIVE
         points = np.argwhere(ndist > dist_scale * ndmax)
     else:
-        mode = CLK_POSITIVE
+        mode = CLK_NEGATIVE
         points = np.argwhere(pdist > dist_scale * pdmax)
 
     if len(points) == 0:

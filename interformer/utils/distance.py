@@ -27,7 +27,7 @@ def mask_to_distance(mask: Union[torch.Tensor, np.ndarray],
     dist = np.stack(
         list(map(
             lambda x: cv2.distanceTransform(x, cv2.DIST_L2, 0),
-            mask.reshape((-1,) + mask.shape[-2:]).astype(np.uint8))),
+            mask.reshape((-1, ) + mask.shape[-2:]).astype(np.uint8))),
         axis=0).reshape(mask.shape)
 
     if boundary_padding:

@@ -1,10 +1,10 @@
 crop_size = (512, 512)
 
 pipeline = [
-    dict(type='Resize', img_scale=None, ratio_range=(0.75, 1.40)),
+    dict(type='Resize', img_scale=None, ratio_range=(0.5, 2.0)),
     dict(type='RandomFlip', prob=0.5),
     dict(type='Pad', size=crop_size, pad_val=0, seg_pad_val=0),
-    dict(type='RandomCrop', crop_size=crop_size),
+    dict(type='RandomCrop', crop_size=crop_size, cat_max_ratio=0.75),
     dict(type='PhotoMetricDistortion'),
     dict(
         type='Normalize',

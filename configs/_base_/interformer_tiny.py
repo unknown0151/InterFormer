@@ -64,7 +64,10 @@ model = dict(
         inner_radius=5,
         outer_radius=0,
         sfc_inner_k=1.7),
-    test_cfg=dict())
+    test_cfg=dict(
+        num_clicks=20,
+        inner_radius=5,
+        outer_radius=0))
 
 
 # optimizer
