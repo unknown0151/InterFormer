@@ -12,6 +12,7 @@ from .base import BaseInterSegmentor
 
 @SEGMENTORS.register_module()
 class ClickSegmentor(BaseInterSegmentor):
+
     @staticmethod
     def update_ref_label_by_point_lists(
             ref_label: torch.Tensor,
@@ -246,7 +247,7 @@ class ClickSegmentor(BaseInterSegmentor):
         # Perform interactive testing.
         for _ in range(cfg.num_clicks):
             # Perform point selection.
-            ref_label, (points,) = self.click(
+            ref_label, (points, ) = self.click(
                 ref_label=ref_label,
                 pre_label=out,
                 seg_label=(gt_semantic_seg == 1).to(gt_semantic_seg),
