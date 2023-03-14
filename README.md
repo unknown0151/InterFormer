@@ -30,6 +30,11 @@ cd mmsegmentation
 pip install -e .
 ```
 
+### Install Other
+```shell
+pip install -r requriments.txt
+```
+
 ## Data preparation
 
 ### COCO Dataset
