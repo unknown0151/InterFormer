@@ -184,3 +184,20 @@ CUDA_VISIBLE_DEVICES=0,1,2,3 bash tools/dist_clicktest.sh work_dirs/interformer_
 This command will start the evaluation by specifying the trained weight file `work_dirs/interformer_tiny_coco_lvis_320k/iter_320000.pth` and loading the configuration file `interformer_tiny_coco_lvis_320k.py` in the same folder.
 
 The results are stored in `work_dirs/interformer_tiny_coco_lvis_320k/clicktest_sbd_iter_320000_xxxx.json`.
+
+
+## Running Demo
+
+To run the demo directly with Python, use the following command in your terminal:
+```shell
+python demo/main.py path/to/checkpoint --device [cpu|cuda:0]
+```
+where:
+
+- path/to/checkpoint specifies the path to the checkpoint file that will be loaded before running the program.
+- --device specifies the device to use, either cpu or gpu.
+
+Here's an example script to run the demo:
+```shell
+python demo/main.py work_dirs/interformer_tiny_coco_lvis_320k/iter_320000.pth --device cpu
+```

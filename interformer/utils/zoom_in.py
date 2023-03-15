@@ -3,7 +3,7 @@ import numpy as np
 import torch
 
 
-def get_bounding_boxes_from_mask(mask: Union[torch.Tensor, np.ndarray]) -> Union[torch.Tensor, np.ndarray]:
+def get_bbox_from_mask(mask: Union[torch.Tensor, np.ndarray]) -> Union[torch.Tensor, np.ndarray]:
     """
     Returns the bounding boxes (left, up, right, bottom) of each mask in the given tensor.
 
