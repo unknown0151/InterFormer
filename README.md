@@ -8,7 +8,7 @@ InterFormer follows a new pipeline to address the issues of existing pipeline's 
 ## Install
 
 ### Requirements
-
+Ensure the following requirements are met before proceeding with the installation process:
 - Python 3.8+
 - PyTorch 1.12.0
 - mmcv-full 1.6.0
@@ -16,7 +16,7 @@ InterFormer follows a new pipeline to address the issues of existing pipeline's 
 
 ### Install PyTorch
 
-please refer to [INSTALLING PREVIOUS VERSIONS OF PYTORCH](https://pytorch.org/get-started/previous-versions/)
+To install PyTorch, please refer to the following resource: [INSTALLING PREVIOUS VERSIONS OF PYTORCH](https://pytorch.org/get-started/previous-versions/)
 
 ### Install mmcv-full
 ```shell
@@ -30,7 +30,7 @@ cd mmsegmentation
 pip install -e .
 ```
 
-### Install Other
+### Install Additional Dependency
 ```shell
 pip install -r requriments.txt
 ```
@@ -38,17 +38,15 @@ pip install -r requriments.txt
 ## Data preparation
 
 ### COCO Dataset
-please refer to [cocodataset](https://cocodataset.org/#download) to download [2017 Train Images](http://images.cocodataset.org/zips/train2017.zip), [2017 Val images](http://images.cocodataset.org/zips/val2017.zip) and [2017 Stuff Train/Val annotations](http://images.cocodataset.org/annotations/stuff_annotations_trainval2017.zip) into `data`
+To download the COCO dataset, please refer to [cocodataset](https://cocodataset.org/#download). You will need to download the following: [2017 Train Images](http://images.cocodataset.org/zips/train2017.zip), [2017 Val images](http://images.cocodataset.org/zips/val2017.zip) and [2017 Panoptic Train/Val annotations](http://images.cocodataset.org/annotations/panoptic_annotations_trainval2017.zip) into `data`
 
-or 
-
-use the following script
+Alternatively, you can use the following script:
 ```shell
 cd data/coco2017
 bash coco2017.sh
 ```
 
-the data is organized as follows
+The data is organized as follows:
 ```
 data/coco2017/
 ├── annotations
@@ -67,9 +65,9 @@ data/coco2017/
 
 ### LVIS Dataset
 
-please refer to [lvisdataset](https://www.lvisdataset.org/dataset) to download the images and annotations
+To download the LVIS dataset, please refer to [lvisdataset](https://www.lvisdataset.org/dataset) to download the images and annotations.
 
-data is organized as follows
+The data is organized as follows:
 ```
 data/lvis/
 ├── lvis_v1_train.json
@@ -83,9 +81,9 @@ data/lvis/
 ```
 
 ### SBD Dataset
-please refer to [SBD](http://home.bharathh.info/pubs/codes/SBD/download.html) to download SBD dataset
+To download the SBD dataset, please refer to [SBD](http://home.bharathh.info/pubs/codes/SBD/download.html).
 
-the data is organized as follows
+The data is organized as follows:
 ```
 data/sbd/
 ├── benchmark_RELEASE
@@ -101,40 +99,66 @@ data/sbd/
 
 ### DAVIS & GrabCut & Berkeley Datasets
 
-please download [DAVIS](https://github.com/saic-vul/fbrs_interactive_segmentation/releases/download/v1.0/DAVIS.zip)
+Please download [DAVIS](https://github.com/saic-vul/fbrs_interactive_segmentation/releases/download/v1.0/DAVIS.zip)
 [GrabCut](https://github.com/saic-vul/fbrs_interactive_segmentation/releases/download/v1.0/GrabCut.zip)
 [Berkeley](https://github.com/saic-vul/fbrs_interactive_segmentation/releases/download/v1.0/Berkeley.zip) from [Reviving Iterative Training with Mask Guidance for Interactive Segmentation](https://github.com/SamsungLabs/ritm_interactive_segmentation#reviving-iterative-training-with-mask-guidance-for-interactive-segmentation)
 
-the data is organized as follows
+The data is organized as follows:
 ```
-data/davis/
-└── DAVIS
-    ├── gt [345 entries exceeds filelimit, not opening dir]
-    ├── img [345 entries exceeds filelimit, not opening dir]
-    └── list
-        ├── val_ctg.txt
-        └── val.txt
-```
+data/
+├── berkeley
+│   └── Berkeley
+│       ├── gt [100 entries exceeds filelimit, not opening dir]
+│       ├── img [100 entries exceeds filelimit, not opening dir]
+│       └── list
+│           └── val.txt
+├── coco -> /data/hy/coco/
+├── coco2017 -> /data/hy/coco/coco2017
+├── davis
+│   └── DAVIS
+│       ├── gt [345 entries exceeds filelimit, not opening dir]
+│       ├── img [345 entries exceeds filelimit, not opening dir]
+│       └── list
+│           ├── val_ctg.txt
+│           └── val.txt
+└── grabcut
+    └── GrabCut
+        ├── gt [50 entries exceeds filelimit, not opening dir]
+        ├── img [50 entries exceeds filelimit, not opening dir]
+        └── list
+            └── val.txt
 
-```
-data/grabcut/
-└── GrabCut
-    ├── gt [50 entries exceeds filelimit, not opening dir]
-    ├── img [50 entries exceeds filelimit, not opening dir]
-    └── list
-        └── val.txt
-```
-
-```
-data/berkeley/
-└── Berkeley
-    ├── gt [100 entries exceeds filelimit, not opening dir]
-    ├── img [100 entries exceeds filelimit, not opening dir]
-    └── list
-        └── val.txt
 ```
 
 ## Training
+
+### MAE-Pretrained Weight
+
+To download and transform the MAE-pretrained weights into mmseg-style, please refer to [MAE](mmsegmentation/configs/mae/README.md).
+
+E.g.
+
+```shell
+python tools/model_converters/beit2mmseg.py https://dl.fbaipublicfiles.com/mae/pretrain/mae_pretrain_vit_base.pth pretrain/mae_pretrain_vit_base_mmcls.pth
+```
+
+The required weight files are located in the `pretrain` directory and are organized as follows:
+```
+pretrain
+├── mae_pretrain_vit_base_mmcls.pth
+└── mae_pretrain_vit_large_mmcls.pth
+```
+
+### Start Training
+
+To start the training of InterFormer-Light, run the following script:
+```shell
+CUDA_VISIBLE_DEVICES=0,1,2,3 bash tools/dist_train.sh configs/interformer_light_coco_lvis_320k.py 4 --seed 42 --no-validate
+```
+To train InterFormer-Tiny, use the following script:
+```shell
+CUDA_VISIBLE_DEVICES=0,1,2,3 bash tools/dist_train.sh configs/interformer_tiny_coco_lvis_320k.py 4 --seed 42 --no-validate
+```
 
 ## Evaluation
 
