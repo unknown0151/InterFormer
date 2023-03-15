@@ -18,7 +18,7 @@ from mmseg.models.utils.embed import PatchMerging
 
 from ..utils import rearrange
 
-IMSA_BLOCKS = Registry('p2tneck_blocks', parent=MMCV_MODELS)
+IMSA_BLOCKS = Registry('IMSA_blocks', parent=MMCV_MODELS)
 def build_imsa_block(cfg):
     return IMSA_BLOCKS.build(cfg)
 
