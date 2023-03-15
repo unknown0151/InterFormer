@@ -158,14 +158,29 @@ The trained weights are stored in `work_dirs/interformer_light_coco_lvis_320k` o
 
 ## Evaluation
 
-The trained weights are stored at [InterFormer](https://drive.google.com/drive/folders/1kEll7pqulpE00JcCvSut0e9C4peKDWRe?usp=sharing)
+The trained weights are available at [InterFormer](https://drive.google.com/drive/folders/1kEll7pqulpE00JcCvSut0e9C4peKDWRe?usp=sharing)
 
-To start the evaluation on the GrabCut, Berkeley, SBD, and DAVIS datasets, use the following script:
-
-For example, to evaluate on SBD:
-
+To start the evaluation on the GrabCut, Berkeley, SBD, or DAVIS dataset, use the following script:
 ```shell
-CUDA_VISIBLE_DEVICES=0,1,2,3 bash tools/dist_clicktest.sh work_dirs/interformer_light_coco_lvis_320k/iter_320000.pth 4 --dataset sbd --size_divisor 32
+CUDA_VISIBLE_DEVICES=0,1,2,3 bash tools/dist_clicktest.sh ${CHECKPOINT_FILE} ${GPU_NUM} [--dataset ${DATASET_NAME}] [--size_divisor ${SIZE_DIVISOR}]
 ```
 
-The results are stored in `work_dirs/interformer_light_coco_lvis_320k/clicktest_sbd_iter_320000_xxxx.json`.
+where `CHECKPOINT_FILE` is the path to the trained weight file, `GPU_NUM` is the number of GPUs used for evaluation, `DATASET_NAME` is the name of the dataset to evaluate on, and `SIZE_DIVISOR` is the divisor used to pad the image. The script will look for the `CONFIG_FILE` in the same folder of `CHECKPOINT_FILE` (`.py` extension).
+
+For example, assume the data is organized as follows:
+
+```
+work_dirs/
+└── interformer_tiny_coco_lvis_320k
+    ├── interformer_tiny_coco_lvis_320k.py
+    └── iter_320000.pth
+```
+
+To evaluate on SBD with InterFormer-Tiny, run:
+
+```shell
+CUDA_VISIBLE_DEVICES=0,1,2,3 bash tools/dist_clicktest.sh work_dirs/interformer_tiny_coco_lvis_320k/iter_320000.pth 4 --dataset sbd --size_divisor 32
+```
+This command will start the evaluation by specifying the trained weight file `work_dirs/interformer_tiny_coco_lvis_320k/iter_320000.pth` and loading the configuration file `interformer_tiny_coco_lvis_320k.py` in the same folder.
+
+The results are stored in `work_dirs/interformer_tiny_coco_lvis_320k/clicktest_sbd_iter_320000_xxxx.json`.
