@@ -52,13 +52,9 @@ data/coco2017/
 ├── annotations
 │   ├── panoptic_train2017 [118287 entries exceeds filelimit, not opening dir]
 │   ├── panoptic_train2017.json
-│   ├── panoptic_train2017.zip
 │   ├── panoptic_val2017 [5000 entries exceeds filelimit, not opening dir]
-│   ├── panoptic_val2017.json
-│   └── panoptic_val2017.zip
-├── annotations_trainval2017.zip
+│   └── panoptic_val2017.json
 ├── coco2017.sh
-├── panoptic_annotations_trainval2017.zip
 ├── train2017 [118287 entries exceeds filelimit, not opening dir]
 └── val2017 [5000 entries exceeds filelimit, not opening dir]
 ```
@@ -161,6 +157,8 @@ CUDA_VISIBLE_DEVICES=0,1,2,3 bash tools/dist_train.sh configs/interformer_tiny_c
 The trained weights are stored in `work_dirs/interformer_light_coco_lvis_320k` or `work_dirs/interformer_tiny_coco_lvis_320k`.
 
 ## Evaluation
+
+The trained weights are stored at [InterFormer](https://drive.google.com/drive/folders/1kEll7pqulpE00JcCvSut0e9C4peKDWRe?usp=sharing)
 
 To start the evaluation on the GrabCut, Berkeley, SBD, and DAVIS datasets, use the following script:
 
