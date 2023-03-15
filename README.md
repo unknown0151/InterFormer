@@ -112,8 +112,6 @@ data/
 │       ├── img [100 entries exceeds filelimit, not opening dir]
 │       └── list
 │           └── val.txt
-├── coco -> /data/hy/coco/
-├── coco2017 -> /data/hy/coco/coco2017
 ├── davis
 │   └── DAVIS
 │       ├── gt [345 entries exceeds filelimit, not opening dir]
@@ -160,7 +158,16 @@ To train InterFormer-Tiny, use the following script:
 CUDA_VISIBLE_DEVICES=0,1,2,3 bash tools/dist_train.sh configs/interformer_tiny_coco_lvis_320k.py 4 --seed 42 --no-validate
 ```
 
+The trained weights are stored in `work_dirs/interformer_light_coco_lvis_320k` or `work_dirs/interformer_tiny_coco_lvis_320k`.
+
 ## Evaluation
 
-# Results
-Include the results reported in the paper, along with any additional results obtained by the implementation.
+To start the evaluation on the GrabCut, Berkeley, SBD, and DAVIS datasets, use the following script:
+
+For example, to evaluate on SBD:
+
+```shell
+CUDA_VISIBLE_DEVICES=0,1,2,3 bash tools/dist_clicktest.sh work_dirs/interformer_light_coco_lvis_320k/iter_320000.pth 4 --dataset sbd --size_divisor 32
+```
+
+The results are stored in `work_dirs/interformer_light_coco_lvis_320k/clicktest_sbd_iter_320000_xxxx.json`.
