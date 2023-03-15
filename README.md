@@ -32,7 +32,7 @@ pip install -e .
 
 ### Install Additional Dependency
 ```shell
-pip install -r requriments.txt
+pip install -r requirements.txt
 ```
 
 ## Data preparation
