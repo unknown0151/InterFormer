@@ -1,8 +1,34 @@
 # InterFormer
 This repo is the official implementation of "InterFormer: Real-time Interactive Image Segmentation"
 
+
 # Introduction
 InterFormer follows a new pipeline to address the issues of existing pipeline's low computational efficiency. InterFormer extracts and preprocesses the computationally time-consuming part i.e. image processing from the existing process. Specifically, InterFormer employs a large vision transformer (ViT) on high-performance devices to preprocess images in parallel, and then uses a lightweight module called interactive multi-head self attention (I-MSA) for interactive segmentation. InterFormer achieves real-time high-quality interactive segmentation on CPU-only devices.
+
+
+# Demo
+<p float="left">
+  <img src="assets/cod2.gif" width="300" />
+  <img src="assets/apples.gif" width="300" /> 
+</p>
+
+<p float="left">
+  <img src="assets/cod3.gif" width="300" />
+  <img src="assets/cod1.gif" width="300" />
+  <img src="assets/cod5.gif" width="300" />
+  <img src="assets/cod4.gif" width="300" />
+</p>
+
+<p float="left">
+  <img src="assets/crack.gif" width="300" />
+  <img src="assets/parrot.gif" width="300" /> 
+</p>
+
+<p float="left">
+  <img src="assets/sheep.gif" width="300" />
+  <img src="assets/swimmer.gif" width="300" /> 
+</p>
+
 
 # Usage
 ## Install
