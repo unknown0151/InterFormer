@@ -7,9 +7,11 @@ InterFormer follows a new pipeline to address the issues of existing pipeline's 
 
 
 # Demo
-| <img src="assets/cod2.gif" width="250"/> | <img src="assets/apples.gif" width="250"/> | <img src="assets/cod3.gif" width="250"/> |
-| <img src="assets/cod1.gif" width="250"/> | <img src="assets/cod5.gif" width="250"/> | <img src="assets/crack.gif" width="250"/> |
-| <img src="assets/parrot.gif" width="250"/> | <img src="assets/sheep.gif" width="250"/> | <img src="assets/swimmer.gif" width="250"/> |
+<img src="assets/cod2.gif" width="250"/> <img src="assets/apples.gif" width="250"/> | <img src="assets/cod3.gif" width="250"/> 
+
+<img src="assets/cod1.gif" width="250"/> <img src="assets/cod5.gif" width="250"/> <img src="assets/crack.gif" width="250"/> 
+
+<img src="assets/parrot.gif" width="250"/> <img src="assets/sheep.gif" width="250"/> <img src="assets/swimmer.gif" width="250"/>
 
 
 # Usage
