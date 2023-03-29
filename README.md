@@ -7,27 +7,9 @@ InterFormer follows a new pipeline to address the issues of existing pipeline's 
 
 
 # Demo
-<p float="left">
-  <img src="assets/cod2.gif" width="300" />
-  <img src="assets/apples.gif" width="300" /> 
-</p>
-
-<p float="left">
-  <img src="assets/cod3.gif" width="300" />
-  <img src="assets/cod1.gif" width="300" />
-  <img src="assets/cod5.gif" width="300" />
-  <img src="assets/cod4.gif" width="300" />
-</p>
-
-<p float="left">
-  <img src="assets/crack.gif" width="300" />
-  <img src="assets/parrot.gif" width="300" /> 
-</p>
-
-<p float="left">
-  <img src="assets/sheep.gif" width="300" />
-  <img src="assets/swimmer.gif" width="300" /> 
-</p>
+| <img src="assets/cod2.gif" width="250"/> | <img src="assets/apples.gif" width="250"/> | <img src="assets/cod3.gif" width="250"/> |
+| <img src="assets/cod1.gif" width="250"/> | <img src="assets/cod5.gif" width="250"/> | <img src="assets/crack.gif" width="250"/> |
+| <img src="assets/parrot.gif" width="250"/> | <img src="assets/sheep.gif" width="250"/> | <img src="assets/swimmer.gif" width="250"/> |
 
 
 # Usage
