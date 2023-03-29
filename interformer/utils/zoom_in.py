@@ -3,6 +3,21 @@ import numpy as np
 import torch
 
 
+def get_label_ids_with_areas(mask):
+    if isinstance(mask, np.ndarray):
+        if not mask.any():
+            return None, None
+        areas = np.bincount(mask.astype(np.uint8).flat)
+        label_ids = np.nonzero(areas)[0]
+        label_ids = list(filter(lambda x: x != 0, label_ids))
+        return label_ids, areas[label_ids].tolist()
+    elif isinstance(mask, torch.Tensor):
+        # todo
+        raise NotImplementedError
+    else:
+        raise NotImplementedError
+
+
 def get_bbox_from_mask(mask: Union[torch.Tensor, np.ndarray]) -> Union[torch.Tensor, np.ndarray]:
     """
     Returns the bounding boxes (left, up, right, bottom) of each mask in the given tensor.
